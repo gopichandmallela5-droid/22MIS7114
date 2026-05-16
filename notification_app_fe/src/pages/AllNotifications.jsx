@@ -65,7 +65,14 @@ function AllNotifications() {
       <Navbar />
 
       <div style={{ padding: "20px" }}>
-        <h1>All Notifications</h1>
+        <h1
+        style={{
+          marginBottom: "20px",
+          color: "#1f2937",
+          }}
+          >
+            All Notifications
+            </h1>
 
         <select
           value={filterType}
