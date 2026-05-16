@@ -19,7 +19,9 @@ function App() {
 
         <Route
           path="/priority"
-          element={<PriorityNotifications />}
+          element={
+            <PriorityNotifications />
+          }
         />
       </Routes>
     </BrowserRouter>

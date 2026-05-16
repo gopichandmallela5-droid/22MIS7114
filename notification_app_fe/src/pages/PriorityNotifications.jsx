@@ -4,16 +4,26 @@ import { getNotifications } from "../api/notificationApi";
 
 import NotificationCard from "../components/NotificationCard";
 
-import { priorityOrder } from "../utils/priorityConfig";
+import Navbar from "../components/Navbar";
+
+const priorityOrder = {
+  Placement: 3,
+  Result: 2,
+  Event: 1,
+};
 
 function PriorityNotifications() {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] =
+    useState([]);
 
   useEffect(() => {
-    async function fetchPriorityNotifications() {
-      const data = await getNotifications();
+    async function fetchData() {
+      const data =
+        await getNotifications();
 
-      const sortedNotifications = [...data].sort((a, b) => {
+      const sortedData = [
+        ...data,
+      ].sort((a, b) => {
         const priorityDifference =
           priorityOrder[b.Type] -
           priorityOrder[a.Type];
@@ -28,25 +38,34 @@ function PriorityNotifications() {
         );
       });
 
-      const topNotifications =
-        sortedNotifications.slice(0, 10);
-
-      setNotifications(topNotifications);
+      setNotifications(
+        sortedData.slice(0, 10)
+      );
     }
 
-    fetchPriorityNotifications();
+    fetchData();
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Priority Notifications</h1>
+    <div>
+      <Navbar />
 
-      {notifications.map((item, index) => (
-        <NotificationCard
-          key={item.ID || index}
-          item={item}
-        />
-      ))}
+      <div style={{ padding: "20px" }}>
+        <h1>
+          Priority Notifications
+        </h1>
+
+        {notifications.map(
+          (item, index) => (
+            <NotificationCard
+              key={
+                item.ID || index
+              }
+              item={item}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 }

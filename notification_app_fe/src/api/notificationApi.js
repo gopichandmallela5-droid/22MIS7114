@@ -1,4 +1,7 @@
-const token = import.meta.env.VITE_ACCESS_TOKEN;
+const token =
+  import.meta.env.VITE_ACCESS_TOKEN;
+
+console.log("TOKEN:", token);
 
 export async function getNotifications() {
   try {
@@ -12,13 +15,15 @@ export async function getNotifications() {
       }
     );
 
+    console.log("STATUS:", response.status);
+
     const data = await response.json();
 
-    console.log(data);
+    console.log("DATA:", data);
 
     return data.notifications || [];
   } catch (error) {
-    console.log(error);
+    console.log("ERROR:", error);
 
     return [];
   }
